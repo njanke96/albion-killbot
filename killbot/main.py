@@ -1,27 +1,19 @@
 """
 Module containing main function
 """
+import os
 import argparse
 import logging
 import coloredlogs
 from collections import defaultdict
 
-from .discord_bot import discord_client
+from .discord_bot import DiscordClient
 
 
 def killbot_main():
     ## Argument parsing
     parser = argparse.ArgumentParser(
         description="Basic Albion Online discord kill and death notification bot."
-    )
-
-    # Token
-    parser.add_argument(
-        "token",
-        metavar="BOT_TOKEN",
-        type=str,
-        nargs=1,
-        help="The Discord bot token to use.",
     )
 
     # verbosity
@@ -33,7 +25,6 @@ def killbot_main():
     )
 
     args = parser.parse_args()
-    bot_token = args.token[0]
 
     # logging level
     loglvl = logging.INFO
@@ -46,4 +37,12 @@ def killbot_main():
 
     # bot event loop
     logging.info("Starting Discord client...")
-    discord_client.run(bot_token)
+
+    try:
+        discord_client = DiscordClient(os.environ["AOKB_CHANNEL_ID"])
+        discord_client.run(os.environ["AOKB_BOT_TOKEN"])
+    except KeyError:
+        logging.critical(
+            "AOKB_BOT_TOKEN or AOKB_CHANNEL_ID environment variable missing."
+        )
+        exit(-1)

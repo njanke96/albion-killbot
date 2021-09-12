@@ -1,0 +1,6 @@
+#!/bin/bash
+
+AOKB_BOT_TOKEN=YOUR_TOKEN_HERE
+AOKB_CHANNEL_ID=1234
+
+python albion-killbot.py
