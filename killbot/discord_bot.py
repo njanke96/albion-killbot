@@ -16,7 +16,7 @@ class _DiscordClient(discord.Client):
 
     async def killboard_check_loop(self):
         while True:
-            print("ayooo!")
+            print("ayoo!")
             await asyncio.sleep(2)
 
 
