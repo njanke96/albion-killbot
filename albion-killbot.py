@@ -1,0 +1,3 @@
+"""
+Main killbot script.
+"""

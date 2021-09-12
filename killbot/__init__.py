@@ -1,0 +1,3 @@
+"""
+Killbot main module
+"""
