@@ -46,10 +46,12 @@ def killbot_main():
         exit(-1)
 
     try:
-        discord_client = DiscordClient(channel_id)
+        guild_list = os.environ["AOKB_GUILD_IDS"].split(",")[:-1]
+        discord_client = DiscordClient(channel_id, guild_list)
         discord_client.run(os.environ["AOKB_BOT_TOKEN"])
+        
     except KeyError:
         logging.critical(
-            "AOKB_BOT_TOKEN or AOKB_CHANNEL_ID environment variable missing."
+            "Required environment variable missing."
         )
         exit(-1)
