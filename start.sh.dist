@@ -1,6 +1,12 @@
 #!/bin/bash
 
-AOKB_BOT_TOKEN=YOUR_TOKEN_HERE
-AOKB_CHANNEL_ID=1234
+## Discord API
+export AOKB_BOT_TOKEN=YOUR_TOKEN_HERE
+export AOKB_CHANNEL_ID=1234
+
+## Settings
+
+# Comma-separated guild IDs
+export AOKB_GUILD_IDS="wbkg4hdHSHCqYayjGNq-Dw,"
 
 python albion-killbot.py

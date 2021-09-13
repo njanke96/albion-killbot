@@ -38,8 +38,15 @@ def killbot_main():
     # bot event loop
     logging.info("Starting Discord client...")
 
+    # sanitizing
     try:
-        discord_client = DiscordClient(os.environ["AOKB_CHANNEL_ID"])
+        channel_id = int(os.environ["AOKB_CHANNEL_ID"])
+    except ValueError:
+        logging.critical(f'Unable to cast "{os.environ["AOKB_CHANNEL_ID"]}" to int as channel id.')
+        exit(-1)
+
+    try:
+        discord_client = DiscordClient(channel_id)
         discord_client.run(os.environ["AOKB_BOT_TOKEN"])
     except KeyError:
         logging.critical(
