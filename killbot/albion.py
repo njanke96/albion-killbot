@@ -66,7 +66,7 @@ async def get_pvp_kills(guild_id_list, limit=51, offset=0):
                 ]
 
         except Exception as e:
-            logging.warning(f"Encountered an error on kill event request: {str(e)}")
+            logging.debug("Encountered an error on kill event request: {0}".format(e))
             return None
 
 
