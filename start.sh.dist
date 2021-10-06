@@ -9,7 +9,7 @@ export AOKB_CHANNEL_ID=1234
 # Comma-separated guild, alliance, and player IDs
 # For one ID, include a trailing comma. For no IDs, use "NONE,"
 export AOKB_GUILD_IDS="wbkg4hdHSHCqYayjGNq-Dw,"
-export AOKB_ALLIANCE_IDS=","
+export AOKB_ALLIANCE_IDS="NONE,"
 export AOKB_PLAYER_IDS="LTK1cjb9QSyPeVx0Q8i2mA,"
 
 python albion-killbot.py
