@@ -33,7 +33,7 @@ class KillEvent:
         self.num_assists = len(ev["Participants"]) - 1
 
 
-async def get_pvp_kills(guild_id_list, limit=51, offset=0):
+async def get_pvp_kills(guild_id_list, player_id_list, alliance_id_list, limit=51, offset=0):
     """
     Returns a list of KillEvent objects filtered by guild IDs in guild_id_list. Returns None
     if the request failed.
@@ -61,8 +61,18 @@ async def get_pvp_kills(guild_id_list, limit=51, offset=0):
                 return [
                     KillEvent(x)
                     for x in resp_json
+
+                    # Guild ID
                     if x["Killer"]["GuildId"] in guild_id_list
                     or x["Victim"]["GuildId"] in guild_id_list
+
+                    # Player ID
+                    or x["Killer"]["Id"] in player_id_list
+                    or x["Victim"]["Id"] in player_id_list
+
+                    # Alliance ID
+                    or x["Killer"]["AllianceId"] in alliance_id_list
+                    or x["Victim"]["AllianceId"] in alliance_id_list
                 ]
 
         except Exception as e:

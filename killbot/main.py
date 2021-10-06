@@ -47,7 +47,10 @@ def killbot_main():
 
     try:
         guild_list = os.environ["AOKB_GUILD_IDS"].split(",")[:-1]
-        discord_client = DiscordClient(channel_id, guild_list)
+        alliance_list = os.environ["AOKB_ALLIANCE_IDS"].split(",")[:-1]
+        player_list = os.environ["AOKB_PLAYER_IDS"].split(",")[:-1]
+
+        discord_client = DiscordClient(channel_id, guild_list, alliance_list, player_list)
         discord_client.run(os.environ["AOKB_BOT_TOKEN"])
         
     except KeyError:

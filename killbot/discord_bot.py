@@ -18,10 +18,12 @@ class DiscordClient(discord.Client):
     msg_channel_id: Channel ID to send messages in.
     """
 
-    def __init__(self, msg_channel_id, guild_list):
+    def __init__(self, msg_channel_id, guild_list, alliance_list, player_list):
         super().__init__()
         self.channel_id = msg_channel_id
         self.guild_list = guild_list
+        self.alliance_list = alliance_list
+        self.player_list = player_list
 
         # past 20 event ids
         self.event_history = deque()
@@ -46,11 +48,10 @@ class DiscordClient(discord.Client):
         logging.info("GuildID List: " + str(self.guild_list))
 
         while True:
-            events = await get_pvp_kills(self.guild_list, 51, 0) or []
-            events += await get_pvp_kills(self.guild_list, 51, 50) or []
-            events += await get_pvp_kills(self.guild_list, 51, 100) or []
-            events += await get_pvp_kills(self.guild_list, 51, 150) or []
-            events += await get_pvp_kills(self.guild_list, 51, 200) or []
+            i = 0
+            while i <= 200:
+                events = await get_pvp_kills(self.guild_list, self.player_list, self.alliance_list, 51, i) or []
+                i += 50
 
             if events:
                 for event in events:
